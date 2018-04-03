@@ -1,5 +1,5 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany, ManyToOne} from 'typeorm'
-
+import Teacher from '../teachers/entity'
 
 @Entity()
 export class Batch extends BaseEntity {
@@ -48,10 +48,12 @@ export class Evaluation extends BaseEntity {
   @Column('text')
   colourCode: string
 
-  @Column('text')
+  @Column('text', {nullable: true})
   remark: string
 
   @ManyToOne(_ => Student, student => student.evaluations)
   student: Student
 
+  @ManyToOne(_ => Teacher, teacher => teacher.evaluations)
+  teacher: Teacher
 }
