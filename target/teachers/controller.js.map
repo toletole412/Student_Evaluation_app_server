@@ -1,0 +1,1 @@
+{"version":3,"file":"controller.js","sourceRoot":"","sources":["../../src/teachers/controller.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,6DAAqE;AACrE,qCAA+B;AAG/B,IAAqB,iBAAiB,GAAtC;IAKE,WAAW;QACT,OAAO,gBAAO,CAAC,IAAI,EAAE,CAAA;IACvB,CAAC;CACF,CAAA;AAHC;IADC,yBAAG,CAAC,WAAW,CAAC;;;;oDAGhB;AAPkB,iBAAiB;IADrC,oCAAc,EAAE;GACI,iBAAiB,CAQrC;kBARoB,iBAAiB"}
