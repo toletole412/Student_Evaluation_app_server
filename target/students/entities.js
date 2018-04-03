@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const entity_1 = require("../teachers/entity");
 let Batch = class Batch extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -73,13 +74,17 @@ __decorate([
     __metadata("design:type", String)
 ], Evaluation.prototype, "colourCode", void 0);
 __decorate([
-    typeorm_1.Column('text'),
+    typeorm_1.Column('text', { nullable: true }),
     __metadata("design:type", String)
 ], Evaluation.prototype, "remark", void 0);
 __decorate([
     typeorm_1.ManyToOne(_ => Student, student => student.evaluations),
     __metadata("design:type", Student)
 ], Evaluation.prototype, "student", void 0);
+__decorate([
+    typeorm_1.ManyToOne(_ => entity_1.default, teacher => teacher.evaluations),
+    __metadata("design:type", entity_1.default)
+], Evaluation.prototype, "teacher", void 0);
 Evaluation = __decorate([
     typeorm_1.Entity()
 ], Evaluation);

@@ -1,1 +1,1 @@
-{"version":3,"file":"controller.js","sourceRoot":"","sources":["../../src/students/controller.ts"],"names":[],"mappings":""}
+{"version":3,"file":"controller.js","sourceRoot":"","sources":["../../src/students/controller.ts"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA,6DAG4B;AAE5B,yCAAuD;AAGvD,IAAqB,iBAAiB,GAAtC;IAKE,WAAW,CACD,KAAY;QAEpB,OAAO,KAAK,CAAC,IAAI,EAAE,CAAA;IACrB,CAAC;CACF,CAAA;AALC;IAFC,0BAAI,CAAC,UAAU,CAAC;IAChB,8BAAQ,CAAC,GAAG,CAAC;IAEX,WAAA,0BAAI,EAAE,CAAA;;qCAAQ,gBAAK;;oDAGrB;AATkB,iBAAiB;IADrC,oCAAc,EAAE;GACI,iBAAiB,CAUrC;kBAVoB,iBAAiB"}
