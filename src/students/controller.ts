@@ -1,6 +1,6 @@
 import {
-  JsonController, Authorized, CurrentUser, Post, Param, BadRequestError, HttpCode,
-  NotFoundError, ForbiddenError, Get, Body, Put, Delete
+  JsonController, Authorized, CurrentUser, Param, BadRequestError, HttpCode,
+  NotFoundError, ForbiddenError, Get, Body, Patch,Post, Put, Delete
 } from 'routing-controllers'
 //import Teacher from './teachers/entity'
 import { Student, Batch, Evaluation } from './entities'
@@ -18,19 +18,37 @@ export default class StudentController {
   }
 
   //@Authorized()
-  @Get('/fetchBatches')
+  @Get('/batches')
   fetchBatches() {
     return Batch.find()
   }
 
   //@Authorized()
-  @Post('/students')
-  @HttpCode(201)
-  addStudent(
-    @Body() student: Student
+  @Get('/batches/:id')
+  fetchOneBatch(
+    @Param('id') id: number
   ) {
-    return student.save()
+    return Batch.findOneById(id)
   }
+
+  //@Authorized()
+  @Post('/students/:id([0-9]+)')
+  @HttpCode(201)
+  async addStudent(
+    @Param('id') batchId: number,
+    @Body()
+    student: Student
+  ) {
+    const batch = await Batch.findOneById(batchId)
+
+    if (!batch) throw new NotFoundError("Batch not found")
+    student.batch = batch
+    const newStudent = await Student.create({...student,batch}).save();
+
+    return newStudent
+  }
+
+
 
   //@Authorized()
   @Get('/fetchAllStudents')
@@ -45,7 +63,11 @@ export default class StudentController {
   ) {
     return Student.findOneById(id)
   }
+  //import algorithm here
 
+
+
+  //@Authorized()
   @Put('/students/:id([0-9]+)')
   async editStudent(
     @Param('id') id: number,
@@ -57,6 +79,7 @@ export default class StudentController {
     return Student.merge(student, edit).save()
   }
 
+  //@Authorized()
   @Delete('/students/:id([0-9]+)')
   async deleteStudent(
     @Param('id') id: number,
@@ -67,4 +90,18 @@ export default class StudentController {
 
     return Student.merge(student, Delete).save()
   }
+
+  // @Post('/students/:id([0-9]+)/evaluation')
+  // async postEvaluation(
+  //   @Param('id') id: number
+  // ) {
+  //   const student = await Student.findOneById(id)
+  //   if (!student) throw new BadRequestError(`Student does not exist`)
+  //
+  //   const evaluation = await Evaluation.create({
+  //     date,
+  //     colourCode,
+  //     remark
+  //   }).save()
+  // }
 }
