@@ -21,8 +21,16 @@ let StudentController = class StudentController {
     fetchBatches() {
         return entities_1.Batch.find();
     }
-    addStudent(student) {
-        return student.save();
+    fetchOneBatch(id) {
+        return entities_1.Batch.findOneById(id);
+    }
+    async addStudent(batchId, student) {
+        const batch = await entities_1.Batch.findOneById(batchId);
+        if (!batch)
+            throw new routing_controllers_1.NotFoundError("Batch not found");
+        student.batch = batch;
+        const newStudent = await entities_1.Student.create(Object.assign({}, student, { batch })).save();
+        return newStudent;
     }
     fetchAllstudents() {
         return entities_1.Student.find();
@@ -52,18 +60,26 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], StudentController.prototype, "createBatch", null);
 __decorate([
-    routing_controllers_1.Get('/fetchBatches'),
+    routing_controllers_1.Get('/batches'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], StudentController.prototype, "fetchBatches", null);
 __decorate([
-    routing_controllers_1.Post('/students'),
-    routing_controllers_1.HttpCode(201),
-    __param(0, routing_controllers_1.Body()),
+    routing_controllers_1.Get('/batches/:id'),
+    __param(0, routing_controllers_1.Param('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [entities_1.Student]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
+], StudentController.prototype, "fetchOneBatch", null);
+__decorate([
+    routing_controllers_1.Post('/students/:id([0-9]+)'),
+    routing_controllers_1.HttpCode(201),
+    __param(0, routing_controllers_1.Param('id')),
+    __param(1, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, entities_1.Student]),
+    __metadata("design:returntype", Promise)
 ], StudentController.prototype, "addStudent", null);
 __decorate([
     routing_controllers_1.Get('/fetchAllStudents'),
