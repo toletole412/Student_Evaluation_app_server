@@ -6,7 +6,9 @@ import LoginController from './logins/controller'
 import TeacherController from './teachers/controller'
 import StudentController from './students/controller'
 import Teacher from './teachers/entity'
+import * as Koa from 'koa'
 import { verify } from "./jwt";
+import {secret} from './jwt'
 
 
 
