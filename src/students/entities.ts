@@ -29,7 +29,7 @@ export class Student extends BaseEntity {
   @Column('text')
   picture: string
 
-  @ManyToOne(_ => Batch, batch => batch.students)
+  @ManyToOne(_ => Batch, batch => batch.students )
   batch: Batch
 
   @OneToMany(_ => Evaluation, evaluation => evaluation.student, {eager:true} )
